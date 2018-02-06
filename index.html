@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"></meta>
-    <title>街区地图</title>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="./index.css" />
-  </head>
-  <body>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=exO0LXQ0HVsGyZl5uc1Mjps7ket1PTxp"></script>
+	<title>地图展示</title>
+</head>
+<body>
+
     <div id="app">
-      <div class="sidebar">
-        <span data-bind="text: regionName"></span>
-        <input data-bind="textInput: regionName" />
-        <ul class="sidebar-ul" data-bind="foreach: regionList">
-          <li data-bind="text: $data"></li>
-        </ul>
-      </div>
-      <div class="content"></div>
+        <div class="sidebar">
+            <span data-bind="text: regionName"></span>
+            <input data-bind="textInput: regionName" />
+            <ul class="sidebar-ul" data-bind="foreach: regionList">
+            <li data-bind="text: $data"></li>
+            </ul>
+        </div>
+        <div id="content"></div>
     </div>
     <script src="./lib/knockout.3.4.2.js"></script>
     <script src="./lib/jquery-3.3.1.min.js"></script>
     <script src="./app.js"></script>
-  </body>
+    <script type="text/javascript" src="./map.js"></script>
+</body>
 </html>

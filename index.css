@@ -1,8 +1,8 @@
-html, body {
+html, body, #app{
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 0 auto; 
 }
 input {
   -webkit-appearance: none;
@@ -22,7 +22,7 @@ input {
   width: 100%;
 }
 .sidebar {
-  width: 40%;
+  width: 30%;
 }
 
 .sidebar-ul {
@@ -34,4 +34,14 @@ input {
   border: 1px solid #e4e7ed;
   border-radius: 4px;
   width: 100%;
+}
+
+#content {
+  width: 70%;
+  height: 100%;
+}
+
+.sidebar, #content {
+  display: inline-block;
+  float: left;
 }
