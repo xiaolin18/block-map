@@ -12,10 +12,11 @@
     <div id="app">
         <div class="sidebar">
             <span data-bind="text: regionName"></span>
-            <input data-bind="textInput: regionName" />
-            <ul class="sidebar-ul" data-bind="foreach: regionList">
+            <input id="suggest" data-bind="textInput: regionName, click: fun_search" />
+            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+            <!-- <ul class="sidebar-ul" data-bind="foreach: regionList">
             <li data-bind="text: $data"></li>
-            </ul>
+            </ul> -->
         </div>
         <div id="content"></div>
     </div>
