@@ -21,7 +21,7 @@ input {
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   width: 100%;
 }
-.sidebar {
+#sidebar {
   width: 30%;
 }
 
@@ -36,12 +36,24 @@ input {
   width: 100%;
 }
 
-#content {
+li{
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#map {
   width: 70%;
   height: 100%;
 }
 
-.sidebar, #content {
+#sidebar, #map {
   display: inline-block;
   float: left;
 }
