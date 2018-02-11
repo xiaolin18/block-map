@@ -11,26 +11,26 @@ var defaultList1 = [
     { local: [116.395486,39.932913] , name: '北海公园' },
     { local: [116.403414,39.924091] , name: '故宫博物馆' }
 ];
-// var model = function(){
-//     self.regionName = ko.observable(),
-//     self.regionList = ko.observableArray(self.defaultList),
-//     self.infoWindow = ko.observable(),
-//     self.tips = ko.observable("")
-// };
-// ko.applyBindings(new model());
 
 var model = {
     regionName: ko.observable(),
     regionList: ko.observableArray(this.defaultList),
     infoWindow: ko.observable(),
     tips: ko.observable(""),
+    menuVisible: ko.observable(true),
     changeRegionList: function(val) {
         console.log('changeRegionList come in', val);
         model.regionList([val]);
         self.initMark();
+    },
+    doSearch: function(val) {
+      self.doSearch(val.regionName);
+    },
+    showHide: function(val) {
+      val.menuVisible(!val.menuVisible());
+      console.log('====showHide', val.menuVisible());
+      
     }
+
 };
 ko.applyBindings(model);
-
-
-
