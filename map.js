@@ -26,17 +26,19 @@ function initmap() {
 // 初始化标记
 function initMark() {
     this.clearMark();
+    var self = this;
     const regionList = model.regionList();
-    console.log('initmark come in', regionList);
-
+    if (!regionList[0].local) {
+      return;
+    }
     for(var i=0;i<regionList.length;i++){
         var marker = new BMap.Marker(new BMap.Point(regionList[i].local[0],regionList[i].local[1]));  // 创建标注
         var content = regionList[i].name;
         map.addOverlay(marker);               // 将标注添加到地图中
         this.addClickHandler(content,marker);
         if (regionList.length === 1) {
-            marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-            this.createInfo(content, marker);
+          marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+          this.createInfo(content, marker);
         }
     }
 }
@@ -44,6 +46,7 @@ function initMark() {
 // 添加点击事件
 function addClickHandler(content,marker){
     const self = this;
+    // this.getDesc(marker, content);
     marker.addEventListener("click",function(e){
         self.openInfo(content,e)
       }
@@ -75,11 +78,19 @@ function clearMark() {
     }
 }
 
-// 搜索事件
-function doSearch() {
-  console.log('================', model.regionName);
-  var local = new BMap.LocalSearch(map, {
-    renderOptions:{map: map}
-});
-console.log(local.search(model.regionName));
+// http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&
+// 维基百科
+function getDesc(marker, content) {
+  var url = 'http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=' + content + '&bk_length=600';
+  $.ajax({
+  url: url,
+   dataType:'jsonp',
+   success:function(result){
+     console.log('====', result.desc);
+     return result.desc;
+   },
+   error:function(){
+       alert('fail')
+   }
+})
 }
