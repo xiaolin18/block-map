@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="./index.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./index.css">
 	<title>街区地图</title>
 </head>
 <body>
     <div id="app">
         <div id="sidebar" data-bind="visible: menuVisible">
-            <span data-bind="text: regionName"></span>
+            <!-- <span data-bind="text: regionName"></span> -->
 						<div class="search">
 							<input data-bind="textInput: regionName" />
 							<button data-bind="click: doSearch">搜索</button>
@@ -32,8 +32,8 @@
     </div>
     <script type="text/javascript" src="./lib/knockout.3.4.2.js"></script>
     <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=exO0LXQ0HVsGyZl5uc1Mjps7ket1PTxp&callback=initmap"></script>
     <script type="text/javascript" src="./app.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=exO0LXQ0HVsGyZl5uc1Mjps7ket1PTxp&callback=initmap" onerror="mapErrorHandler()"></script>
     <script type="text/javascript" src="./map.js"></script>
 		<script type="text/javascript" src="./iconfont.js"></script>
 </body>

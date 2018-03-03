@@ -33,6 +33,10 @@ var defaultList1 = [
     { local: [116.395486,39.932913] , name: '北海公园' },
     { local: [116.403414,39.924091] , name: '故宫博物馆' }
 ];
+var mapErrorHandler = function(){
+  console.log('error come in');
+  alert('地图加载失败');
+}
 
 var model = {
     regionName: ko.observable(),

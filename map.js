@@ -38,19 +38,28 @@ function initMark() {
         this.addClickHandler(content,marker);
         if (regionList.length === 1) {
           marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-          this.createInfo(content, marker);
+          this.createInfo(content, marker, self);
+
         }
     }
 }
 
 // 添加点击事件
-function addClickHandler(content,marker){
+function addClickHandler(content, marker){
     const self = this;
-    // this.getDesc(marker, content);
-    marker.addEventListener("click",function(e){
-        self.openInfo(content,e)
-      }
-    );
+    marker.addEventListener("click", function (e) {
+    var url = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=" + content + "&bk_length=600";
+    $.ajax({
+        url: url,
+        dataType: "jsonp",
+        success: function(result) {
+        self.openInfo(result.abstract, e);
+        },
+        error: function() {
+        self.openInfo("fail", e);
+        }
+    });
+});
 }
 
 // 添加信息窗口
@@ -62,10 +71,21 @@ function openInfo(content,e){
 }
 
 // 直接创建信息窗口
-function createInfo(content, position) {
+function createInfo(content, position, self) {
   var point = new BMap.Point(position.getPosition().lng, position.getPosition().lat);
-  var infoWindow = new BMap.InfoWindow(content);  // 创建信息窗口对象
-  map.openInfoWindow(infoWindow,point); //开启信息窗口
+  var url = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=" + content + "&bk_length=600";
+  $.ajax({
+      url: url,
+      dataType: "jsonp",
+      success: function(result) {
+      var infoWindow = new BMap.InfoWindow(result.abstract);  // 创建信息窗口对象
+      map.openInfoWindow(infoWindow, point); //开启信息窗口
+
+      },
+      error: function() {
+      self.openInfo("fail", e);
+      }
+  });
 }
 
 // 清空覆盖物
@@ -76,21 +96,4 @@ function clearMark() {
             map.removeOverlay(allOverlay[i]);
         }
     }
-}
-
-// http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&
-// 维基百科
-function getDesc(marker, content) {
-  var url = 'http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=' + content + '&bk_length=600';
-  $.ajax({
-  url: url,
-   dataType:'jsonp',
-   success:function(result){
-     console.log('====', result.desc);
-     return result.desc;
-   },
-   error:function(){
-       alert('fail')
-   }
-})
 }
